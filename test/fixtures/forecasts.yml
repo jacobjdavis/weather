@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  zip: MyString
+  forecast_data: MyText
+  expires_at: 2024-04-25 18:45:48
+
+two:
+  zip: MyString
+  forecast_data: MyText
+  expires_at: 2024-04-25 18:45:48

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Forecast</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    form {
+      margin-top: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      box-sizing: border-box;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      border: none;
+      border-radius: 3px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    .forecast-info {
+      margin-top: 20px;
+    }
+    .forecast-info p {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Weather Forecast</h1>
+
+  <div class="container">
+    <% if @cached %>
+      <p>Forecast data retrieved from cache.</p>
+    <% end %>
+
+    <%= form_with(url: forecasts_index_path, method: "get") do |form| %>
+      <div>
+        <%= form.label :address1, "Address Line 1" %>
+        <%= form.text_field :address1 %>
+        <%= form.label :address2, "Address Line 2" %>
+        <%= form.text_field :address2 %>
+        <%= form.label :city, "City" %>
+        <%= form.text_field :city %>
+        <%= form.label :state, "State" %>
+        <%= form.text_field :state %>
+        <%= form.label :zip, "Zip" %>
+        <%= form.text_field :zip %>
+      </div>
+      <%= form.submit "Get Forecast" %>
+    <% end %>
+
+    <% if @forecast %>
+      <div class="forecast-info">
+        <p>Current Temperature: <%= @forecast['temp'] %>°F</p>
+        <p>Low Temperature: <%= @forecast['temp_min'] %>°F</p>
+        <p>High Temperature: <%= @forecast['temp_max'] %>°F</p>
+      </div>
+    <% else %>
+      <p>Forecast data not available.</p>
+    <% end %>
+  </div>
+</body>
+</html>
