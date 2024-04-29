@@ -17,6 +17,12 @@ RSpec.describe ForecastsController, type: :controller do
         expect(assigns(:forecast)).to be_present
       end
 
+      it "assigns @cached" do
+        get :index, params: { zip: valid_zip, city: valid_city }
+        get :index, params: { zip: valid_zip, city: valid_city }
+        expect(assigns(:cached)).to be_present
+      end
+
       it "caches the forecast data" do
         expect {
           get :index, params: { zip: valid_zip, city: valid_city }
